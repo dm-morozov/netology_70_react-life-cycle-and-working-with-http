@@ -1,6 +1,6 @@
 // «Таймер с очисткой» (аналог componentWillUnmount)
 
-import { useEffect, useState, type JSX, type ReactNode } from 'react'
+import { useEffect, useState, type FC, type JSX, type ReactNode } from 'react'
 
 // 🎯 Цель:
 // Научиться использовать useEffect с функцией очистки (cleanup), чтобы убрать таймер при удалении компонента.
@@ -17,7 +17,7 @@ import { useEffect, useState, type JSX, type ReactNode } from 'react'
  *
  * @returns {JSX.Element} - Компонент Timer.
  */
-const TimerWithCleaning = (): JSX.Element => {
+const TimerWithCleaning: FC<ReactNode> = (): JSX.Element => {
   const [second, setSecond] = useState(0)
   useEffect(() => {
     const interval = setInterval(() => {
