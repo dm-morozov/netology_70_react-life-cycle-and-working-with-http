@@ -1,0 +1,130 @@
+/* WorldClocks.module.css */
+
+.worldClocks {
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Стили для контейнера ввода/кнопок */
+.controlsContainer {
+  max-width: 600px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.clocksContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.clockInput {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.clockInput label {
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+.clockInput input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  min-width: 150px;
+}
+
+.controlsContainer button {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 38px; /* Выравнивание с полями ввода */
+  transition: background-color 0.2s;
+}
+
+.controlsContainer button:hover {
+  background-color: #0056b3;
+}
+
+.controlsContainer button:disabled {
+  background-color: #a0c3e8;
+  cursor: not-allowed;
+}
+
+/* --- Стили для отображения часов --- */
+
+.clocksDisplay {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 10px;
+}
+
+.itemClock {
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 180px;
+  background-color: #f9f9f9;
+}
+
+.clockHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+}
+
+.clockName {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #333;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  color: #ff4d4d;
+  font-size: 1.5em;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0 5px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.removeButton:hover {
+  color: #cc0000;
+}
+
+.digitalTime {
+  font-size: 2.8em;
+  font-family: 'Courier New', monospace;
+  color: #28a745; /* Зеленый для электронных часов */
+  font-weight: bold;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+.timeZoneLabel {
+  font-size: 0.8em;
+  color: #666;
+}
