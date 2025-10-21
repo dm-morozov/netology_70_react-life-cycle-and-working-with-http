@@ -7,7 +7,7 @@
 
 ---
 
-[Посетить сайт проекта](https://dm-morozov.github.io/netology_70_react-life-cycle-and-working-with-http/)
+[Посетить сайт проекта!](https://dm-morozov.github.io/netology_70_react-life-cycle-and-working-with-http/)
 
 ---
 
