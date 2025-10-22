@@ -1,12 +1,7 @@
 import { useCallback, useState, type FC } from 'react'
 import style from './WorldСlocks.module.css'
 import ItemClock from './ItemClock'
-
-interface ClockItem {
-  id: number
-  name: string
-  offsetHours: number // Смещение часового пояса
-}
+import type { ClockItem } from '../../types/worldСlocks'
 
 const WorldСlocks: FC = () => {
   const [clocks, setClocks] = useState<ClockItem[]>([
@@ -50,8 +45,8 @@ const WorldСlocks: FC = () => {
   }
   // Функция для удаления часов. useCallback предотвращает ненужные пересоздания.
   const handleRemoveClock = useCallback((id: number) => {
-    setClocks((prevClocks) => prevClocks.filter(clock))
-  })
+    setClocks((prevClocks) => prevClocks.filter((clock) => clock.id !== id))
+  }, [])
 
   return (
     <div className={style.worldСlocks}>
