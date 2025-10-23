@@ -5,7 +5,6 @@
 ## Статус проекта
 
 [![React + TypeScript Build](https://github.com/dm-morozov/netology_70_react-life-cycle-and-working-with-http/actions/workflows/web.yaml/badge.svg)](https://github.com/dm-morozov/netology_70_react-life-cycle-and-working-with-http/actions/workflows/web.yaml)
-
 ![Netology](https://img.shields.io/badge/React-TypeScript-blue)
 
 ---
