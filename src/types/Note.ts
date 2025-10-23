@@ -3,4 +3,5 @@ export interface Note {
   content: string
 }
 
-export const API_URL = 'http://localhost:7070/notes'
+export const API_URL =
+  'https://netology-70-react-life-cycle-and-working.onrender.com/notes'
