@@ -1,0 +1,198 @@
+/* src/NotesApp.css */
+
+/* --- ПЕРЕМЕННЫЕ И БАЗОВЫЕ СТИЛИ --- */
+:root {
+  --primary-color: #007bff; /* Синий для акцентов */
+  --secondary-color: #28a745; /* Зеленый для кнопки добавления */
+  --background-light: #f8f9fa; /* Светлый фон страницы */
+  --card-background: #ffffff; /* Белый фон карточек */
+  --text-color: #343a40; /* Темный текст */
+  --border-color: #ced4da; /* Серый для границ */
+  --shadow-light: 0 4px 8px rgba(0, 0, 0, 0.05); /* Легкая тень */
+  --shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.1); /* Тень при наведении */
+}
+
+/* --- КОНТЕЙНЕР ПРИЛОЖЕНИЯ --- */
+.notes-container {
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 700px;
+  padding: 30px;
+  background-color: var(--card-background);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* --- ЗАГОЛОВОК И КНОПКА ОБНОВЛЕНИЯ --- */
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 15px;
+}
+
+.notes-header h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.refresh-button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s, transform 0.1s;
+  font-weight: 500;
+}
+
+.refresh-button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+/* --- ФОРМА ДОБАВЛЕНИЯ ЗАМЕТКИ --- */
+.note-form {
+  display: grid;
+  grid-template-columns: 1fr auto; /* Текстовое поле занимает всю ширину, кнопка - по контенту */
+  gap: 10px;
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: #f1f1f1;
+}
+
+.note-form textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  resize: vertical;
+  min-height: 50px;
+  max-height: 150px;
+  font-size: 16px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.note-form textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.add-button {
+  background: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+  font-weight: 600;
+  white-space: nowrap; /* Не дает кнопке переноситься */
+}
+
+.add-button:hover:not(:disabled) {
+  background-color: #1e7e34;
+}
+
+/* --- СПИСОК И КАРТОЧКИ ЗАМЕТОК --- */
+
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.note-card {
+  background-color: var(--card-background);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: var(--shadow-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-left: 5px solid var(--primary-color); /* Акцентная полоса */
+  transition: box-shadow 0.3s;
+}
+
+.note-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.note-content {
+  flex-grow: 1; /* Растянуть на всю доступную ширину */
+  margin: 0;
+  padding-right: 15px;
+  line-height: 1.5;
+  white-space: pre-wrap; /* Сохраняет переводы строк из textarea */
+}
+
+.delete-button {
+  background: transparent;
+  color: #dc3545; /* Красный для удаления */
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 5px;
+  transition: color 0.2s, transform 0.1s;
+  flex-shrink: 0; /* Не дает кнопке сжиматься */
+}
+
+.delete-button:hover:not(:disabled) {
+  color: #a71d2a;
+  transform: scale(1.1);
+}
+
+/* --- СООБЩЕНИЯ О СОСТОЯНИИ --- */
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+
+.empty-message {
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+  padding: 20px 0;
+}
+
+/* --- ОБЩИЕ СТИЛИ ДЛЯ КНОПОК (DISABLED) --- */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* --- АДАПТИВНОСТЬ --- */
+@media (max-width: 600px) {
+  .notes-container {
+    padding: 15px;
+  }
+
+  .notes-header h1 {
+    font-size: 24px;
+  }
+
+  .note-form {
+    grid-template-columns: 1fr; /* На маленьких экранах кнопка под текстовым полем */
+  }
+
+  .add-button {
+    padding: 12px;
+  }
+}

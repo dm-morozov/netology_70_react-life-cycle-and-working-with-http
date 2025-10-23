@@ -7,6 +7,7 @@ import {
 } from 'react'
 import type { Note } from '../../types/Note'
 import { API_URL } from '../../types/Note'
+import './NotesApp.css'
 
 const NotesApp: FC = () => {
   // Состояние хранения списка заметок
@@ -78,12 +79,43 @@ const NotesApp: FC = () => {
     }
   }
 
+  // --- ФУНКЦИЯ УДАЛЕНИЯ (DELETE) ---
+  const handleDeleteNote = async (id: string) => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      console.log(`DELETE-запрос: Удаление заметки ID ${id}...`)
+      const response = await fetch(`${API_URL}/${id}`, {
+        method: 'DELETE',
+      })
+
+      if (response.status !== 204) {
+        throw new Error(`Ошибка при удалении: ${response.status}`)
+      }
+
+      // После удаления делаем GET для обновления
+      await fetchNotes()
+    } catch (err) {
+      console.error('Ошибка при удалении заметки:', err)
+      setError('Не удалось найти заметку.')
+      setIsLoading(false)
+    }
+  }
+
   return (
     <div className="notes-container">
-      <h3>Заметки (Backend: {API_URL})</h3>
-      <button onClick={fetchNotes}>
-        &#x21bb; {isLoading ? 'Загрузка...' : 'Обновить'}
-      </button>
+      <header className="notes-header">
+        <h2>Заметки (CRUD)</h2>
+        <button
+          onClick={fetchNotes}
+          disabled={isLoading}
+          className="refresh-button"
+          title="Обновить список (GET)"
+        >
+          &#x21bb; {isLoading ? 'Загрузка...' : 'Обновить'}
+        </button>
+      </header>
       {/* --- ФОРМА ДОБАВЛЕНИЯ --- */}
       <form onSubmit={handleAddNode} className="note-form">
         <textarea
@@ -98,6 +130,7 @@ const NotesApp: FC = () => {
         <button
           type="submit"
           disabled={isLoading || newNoteContent.trim() === ''}
+          className="add-button"
         >
           Добавить
         </button>
@@ -111,8 +144,13 @@ const NotesApp: FC = () => {
           notes.map((note) => (
             <div key={note.id} className="note-card">
               <p className="note-content">{note.content}</p>
-              {/* Крестик для Удаления (реализуем позже) */}
-              <button className="delete-button">&times;</button>
+              <button
+                className="delete-button"
+                onClick={() => handleDeleteNote(note.id)}
+                disabled={isLoading}
+              >
+                &times;
+              </button>
             </div>
           ))
         )}
