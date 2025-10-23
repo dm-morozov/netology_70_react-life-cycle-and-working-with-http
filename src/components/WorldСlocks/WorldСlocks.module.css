@@ -8,6 +8,7 @@
 /* Стили для контейнера ввода/кнопок */
 .controlsContainer {
   max-width: 600px;
+  margin: auto;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
