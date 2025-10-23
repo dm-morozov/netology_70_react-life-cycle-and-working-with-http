@@ -9,7 +9,6 @@ function App() {
   return (
     <>
       <h1>Жизненный цикл и работа с HTTP</h1>
-      <h2>Notes - Карточки</h2>
       <NotesApp />
       <WorldСlocks />
       <h2>«Компонент UserList»</h2>
