@@ -1,0 +1,19 @@
+// tsconfig.json
+
+{
+  "compilerOptions": {
+    "target": "es2020" /* Указываем целевую версию ECMAScript. */,
+    "module": "commonjs" /* Указываем систему модулей для Node.js. */,
+    "rootDir": "./src" /* Исходные файлы находятся в папке 'src'. */,
+    "outDir": "./dist" /* Компилированные файлы будут помещены в 'dist'. */,
+    "esModuleInterop": true /* Включает совместимость для импорта CommonJS как ES-модулей. */,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true /* Включает строгие проверки типов. */,
+    "skipLibCheck": true /* Пропускаем проверку деклараций библиотек. */,
+    "resolveJsonModule": true /* Разрешает импорт JSON-файлов */
+  },
+  "include": [
+    "src/**/*"
+  ] /* Компилировать все файлы в папке src и ее подпапках. */,
+  "exclude": ["node_modules"]
+}
