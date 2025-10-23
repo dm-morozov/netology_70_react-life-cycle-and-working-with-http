@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useState, type FC } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useState,
+  type FC,
+  type FormEvent,
+} from 'react'
 import type { Note } from '../../types/Note'
 import { API_URL } from '../../types/Note'
 
@@ -7,6 +13,7 @@ const NotesApp: FC = () => {
   const [notes, setNotes] = useState<Note[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [newNoteContent, setNewNoteContent] = useState('')
 
   // --- Функция чтения (READ) ---
   const fetchNotes = useCallback(async () => {
@@ -38,6 +45,38 @@ const NotesApp: FC = () => {
     fetchNotes()
     // Запускаем только один раз при монтировании
   }, [fetchNotes])
+  // --- ФУНКЦИЯ ДОБАВЛЕНИЯ (CREATE) ---
+  const handleAddNode = async (event: FormEvent) => {
+    event.preventDefault()
+    const content = newNoteContent.trim()
+    if (content === '') return
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      console.log('POST-запрос: Добавление заметки...')
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: 0, // По заданию сказано передать 0, но в этом нет смысла
+          content: content,
+        }),
+      })
+      if (!response.ok) {
+        throw new Error(`Ошибка при добавлении: ${response.status}`)
+      }
+
+      setNewNoteContent('') // Очищаем поле ввода
+      await fetchNotes()
+    } catch (err) {
+      console.error('Ошибка при добавлении заметки:', err)
+      setError('Не удалось добавить заметку.')
+      setIsLoading(false) // Снимаем загрузку, так как fetchNotes не был вызван
+    }
+  }
 
   return (
     <div className="notes-container">
@@ -45,6 +84,24 @@ const NotesApp: FC = () => {
       <button onClick={fetchNotes}>
         &#x21bb; {isLoading ? 'Загрузка...' : 'Обновить'}
       </button>
+      {/* --- ФОРМА ДОБАВЛЕНИЯ --- */}
+      <form onSubmit={handleAddNode} className="note-form">
+        <textarea
+          name="newNoteContent"
+          id="newNoteContent"
+          value={newNoteContent}
+          onChange={(event) => setNewNoteContent(event.target.value)}
+          placeholder="Введите текст заметки..."
+          rows={4}
+          required
+        />
+        <button
+          type="submit"
+          disabled={isLoading || newNoteContent.trim() === ''}
+        >
+          Добавить
+        </button>
+      </form>
       {error && <p className="error-message">{error}</p>}
       {isLoading && !error && <p>Загрузка данных...</p>}
       <div className="notes-list">
